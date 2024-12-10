@@ -5,7 +5,16 @@ import { UsersRepository } from "../prisma/users-repository";
 
 
 export class inMemoryUsersRepository implements UsersRepository{
-public items: User[] = []
+
+    public items: User[] = []
+
+    findbyid(id: string): Promise<User | null> {
+
+        const user  = this.items.find((item) => item.id ==id)
+
+        throw new Error("Method not implemented.");
+    }
+
 
 
    async  findByEmail(email: string) {

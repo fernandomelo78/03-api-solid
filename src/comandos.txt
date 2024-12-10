@@ -1,0 +1,10 @@
+$ npx prisma studio - carrega o prima e abre o navegado para navegar nas tabelas
+
+Docker
+docker compose up -d  > ler o arquivo docker-compose.yml e sobe a estrutura. O -d oculta os logs  
+docker ps           > listas as maquinas iniciadas
+docker stop 03-api-solid-api-solid-pg-1 > para a aplicação(banco de dados)
+
+Teste no Vitest
+
+npm run test:watch
