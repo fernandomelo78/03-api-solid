@@ -2,6 +2,7 @@ import { PrismaUsersRepository } from "@/repositories/prisma/prisma-users-reposi
 import { AuthenticateUseCase } from "../authenticate"
 
 
+
 export function makeAuthenticadeUseCase() {
     const usersRepository = new PrismaUsersRepository()
     const authenticateUseCase = new AuthenticateUseCase(usersRepository)

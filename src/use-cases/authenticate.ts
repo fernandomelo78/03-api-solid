@@ -1,39 +1,46 @@
+
 import { UsersRepository } from "@/repositories/prisma/users-repository";
 import { invalidCredencialsError } from "./erros/invalid-credentials-error";
-import { User } from "@prisma/client";
 import { compare } from "bcryptjs";
+import { User } from "@prisma/client";
 
-interface AuthenticateUseCaseRequest{
-    email:string
+interface AuthenticateUserCaseRequest{
+    email: string
     password:string
 }
 
-interface AuthenticateUseCaseResponse {
+interface  AuthenticateUseCaseResponse {
     user:User
 }
 
 
-export class AuthenticateUseCase {
-    constructor(private usersRepository: UsersRepository){}
 
-    async execute ({
+export class AuthenticateUseCase {
+    constructor(
+        private usersRepository: UsersRepository) {}
+
+
+    async execute({
         email,
         password,
-    }:AuthenticateUseCaseRequest):Promise<AuthenticateUseCaseResponse>{
+    }: AuthenticateUserCaseRequest) : Promise<AuthenticateUseCaseResponse>{
+
         const user = await this.usersRepository.findByEmail(email)
 
         if(!user){
             throw new invalidCredencialsError()
         }
 
-        const doesPasswordMatches = await compare(password,user.password_hash)
+        const doesNotPasswordMatch = await  compare(password, user.password_hash)
 
-        if(!doesPasswordMatches){
+        if(!doesNotPasswordMatch){
             throw new invalidCredencialsError()
         }
 
         return {
             user,
         }
+
     }
+
 }

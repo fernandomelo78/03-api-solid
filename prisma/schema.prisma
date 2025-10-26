@@ -20,7 +20,7 @@ model User {
   password_hash String
   created_at    DateTime @default(now())
 
-  checkIns Checkin[]
+  checkIns Checkin[] //Usa-se CamelCase nos relacionamento, não é coluna em banco
 
   @@map("users")
 }
@@ -34,7 +34,7 @@ model Checkin {
   user_id String
 
   gym    Gym    @relation(fields: [gym_id], references: [id])
-  gym_id String
+  gym_id String //Em colunas d ebanco, usa-se _ para separar os nomes 
 
   @@map("check_ins")
 }

@@ -3,9 +3,15 @@ import { appRoutes } from './http/routes'
 import { ZodError } from 'zod'
 import { env } from './env'
 
+
 export const app = fastify()
 
+
 app.register(appRoutes)
+
+
+
+// app.register(appRoutes)
 
 app.setErrorHandler((error,request,reply) =>{
     if (error instanceof ZodError){
