@@ -1,11 +1,7 @@
-import { expect, describe, it, beforeEach, vi } from "vitest";
-import { RegisterUseCase } from "./register";
-import { compare } from "bcryptjs";
-import { UserAlreadyExistsErros } from "./erros/user-already-exists-error";
-import { inMemoryUsersRepository } from "@/repositories/in-memory/in-memory-users-repository";
+import { expect, describe, it, beforeEach, vi ,afterEach} from "vitest";
 import { inMemoryCheckInRepository } from "@/repositories/in-memory/in-memory-check-ins-repository";
 import { CheckinUseCase } from "./check-in";
-import { afterEach } from "node:test";
+import { UserAlreadyCheckedInError } from "./erros/user-alread-chekedIn-error";
 
 
 let  checkInRepository:inMemoryCheckInRepository
@@ -28,8 +24,8 @@ describe('CheckIn Use Case',()=>{
        
 
         const {checkIn} = await sut.execute({
-            gymId:'gym-01',
-            userId:'user-01',
+            gymId: 'gym-01',
+            userId: 'user-01',
         })
         
         console.log(checkIn.create_at)
@@ -45,11 +41,16 @@ describe('CheckIn Use Case',()=>{
             userId: 'user-01',
         })
 
+        
         await expect(()=>
-                sut.execute({
+                sut.execute ({
                     gymId:'gym-01',
-                    userId:'user-01',
-                })).rejects.toBeInstanceOf(Error)
+                    userId: 'user-01',
+                }),
+            ).rejects.toBeInstanceOf(UserAlreadyCheckedInError)
+
+    
+    
     })
 
     

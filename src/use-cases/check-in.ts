@@ -4,6 +4,7 @@ import { invalidCredencialsError } from "./erros/invalid-credentials-error";
 import { compare } from "bcryptjs";
 import { Checkin, User } from "@prisma/client";
 import { CheckInsRepository } from "@/repositories/prisma/check-ins-repository";
+import { UserAlreadyCheckedInError } from "./erros/user-alread-chekedIn-error";
 
 interface CheckinUseCaseRequest{
     userId: string
@@ -32,7 +33,8 @@ export class CheckinUseCase {
         )
 
         if(checkInOnSameDay) {
-            throw new Error()
+            //console.log(checkInOnSameDay)
+            throw new UserAlreadyCheckedInError()
         }
         
         const checkIn = await this.checkInRepository.create({
