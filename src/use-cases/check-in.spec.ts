@@ -11,20 +11,20 @@ let gymRepository: InMemoryGymsRepository
 let  sut: CheckinUseCase
 
 
-describe('CheckIn Use Case',()=>{
-    beforeEach(()=>{
+describe('CheckIn Use Case', ()=>{
+    beforeEach(async ()=>{
         checkInRepository = new inMemoryCheckInRepository()
         gymRepository = new InMemoryGymsRepository()
         sut = new CheckinUseCase(checkInRepository,gymRepository)
         vi.useFakeTimers()
 
-        gymRepository.items.push({
+       await  gymRepository.create({
             id:'gym-01',
             title:'Academia Titulo',
             description:'',
             phone:'',
-            latitude:new Decimal(-0),
-            longitude:new Decimal(0),
+            latitude:-27.5962086,
+            longitude:-48.6243741,
         })
     })
 
@@ -42,7 +42,7 @@ describe('CheckIn Use Case',()=>{
             userLongitude:-48.6243741
         })
         
-        console.log(checkIn.create_at)
+        //console.log(checkIn.create_at)
         expect(checkIn.gym_id).toEqual(expect.any(String))
     
     })
@@ -95,16 +95,16 @@ describe('CheckIn Use Case',()=>{
     })
     
     it('should not be able to check-in on distant gym', async ()=>{     
-            const {checkIn} = await sut.execute({
+
+
+        await expect(()=>
+             sut.execute({
                 gymId: 'gym-01',
                 userId: 'user-01',
-                userLatitude:-27.5962086,
-                userLongitude:-48.6243741
-            })
-        
-        console.log(checkIn.create_at)
-        expect(checkIn.gym_id).toEqual(expect.any(String))
-    
+                userLatitude:-27.8962086,
+                userLongitude:-48.8243741
+            }),
+        ).rejects.toBeInstanceOf(Error)   
     })
 
 
