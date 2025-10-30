@@ -4,6 +4,7 @@ import { CheckinUseCase } from "./check-in";
 import { UserAlreadyCheckedInError } from "./erros/user-alread-chekedIn-error";
 import { InMemoryGymsRepository } from "@/repositories/in-memory/in-memory-gyms-repository";
 import { Decimal } from "@prisma/client/runtime/library";
+import { MaxDistanceError } from "./erros/max-distance-error";
 
 
 let  checkInRepository:inMemoryCheckInRepository
@@ -104,7 +105,7 @@ describe('CheckIn Use Case', ()=>{
                 userLatitude:-27.8962086,
                 userLongitude:-48.8243741
             }),
-        ).rejects.toBeInstanceOf(Error)   
+        ).rejects.toBeInstanceOf(MaxDistanceError)   
     })
 
 

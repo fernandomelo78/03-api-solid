@@ -1,13 +1,14 @@
 
-import { UsersRepository } from "@/repositories/prisma/users-repository";
+import { UsersRepository } from "@/repositories/users-repository";
 import { invalidCredencialsError } from "./erros/invalid-credentials-error";
 import { compare } from "bcryptjs";
 import { Checkin, User } from "@prisma/client";
-import { CheckInsRepository } from "@/repositories/prisma/check-ins-repository";
+import { CheckInsRepository } from "@/repositories/check-ins-repository";
 import { UserAlreadyCheckedInError } from "./erros/user-alread-chekedIn-error";
-import { GymsRepository } from "@/repositories/prisma/gyms-repository";
+import { GymsRepository } from "@/repositories/gyms-repository";
 import { resourceNotFoundError } from "./erros/resource-not-found-error";
 import { getDistanceBetweenCoordinates } from "./utils/get-distance-between-coordenates";
+import { MaxDistanceError } from "./erros/max-distance-error";
 
 interface CheckinUseCaseRequest{
     userId: string
@@ -50,7 +51,7 @@ export class CheckinUseCase {
         const max_distance_permited_in_kilometer = 0.1
  
         if(distance > max_distance_permited_in_kilometer){
-            throw new Error('Distance between user and gym is too far')
+            throw new MaxDistanceError()
         }
         
         const checkInOnSameDay = await this.checkInRepository.findByUserIdOnDate(

@@ -1,5 +1,5 @@
 import { Gym, Prisma } from "@prisma/client";
-import { GymsRepository } from "../prisma/gyms-repository";
+import { GymsRepository } from "../gyms-repository";
 import { randomUUID } from "node:crypto";
 import { title } from "node:process";
 

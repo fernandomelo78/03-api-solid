@@ -1,5 +1,5 @@
 
-import { UsersRepository } from "@/repositories/prisma/users-repository";
+import { UsersRepository } from "@/repositories/users-repository";
 import { invalidCredencialsError } from "./erros/invalid-credentials-error";
 import { compare } from "bcryptjs";
 import { User } from "@prisma/client";
