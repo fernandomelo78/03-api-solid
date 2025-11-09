@@ -9,6 +9,34 @@ export class inMemoryCheckInRepository implements CheckInsRepository{
     public items:Checkin[] = []
 
 
+    async save(checkIn: Checkin) {
+        const checkInIndex = this.items.findIndex((item)=>item.id ===checkIn.id)
+
+        if(checkInIndex >= 0){
+            this.items[checkInIndex] = checkIn
+        }
+
+        return checkIn
+    }
+ 
+ 
+    async findById(id: string)  {
+       const checkin =  this.items.find((item)=>item.id === id)
+       
+       if(!checkin){
+        return null
+       }
+
+       return checkin
+    }
+
+    async countByUserId(userId: string) {
+       return this.items
+       .filter((item)=>item.user_id === userId)
+       .length
+    }
+
+
     async findManyByUserId(userId: String, page: number) {
         return this.items
         .filter((item)=> item.user_id ===userId)
