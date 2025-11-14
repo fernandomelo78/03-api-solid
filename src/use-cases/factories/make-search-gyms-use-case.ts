@@ -1,11 +1,11 @@
-import { CreateGymUseCase } from "../create-gym"
+import { SearchGymsUseCase } from "../search-gyms"
 import { PrismaGymsRepository } from "@/repositories/prisma/prisma-gyms-repository"
 
 
 
-export function makeCreateGymUseCase() {
+export function makeSearchGymsUseCase() {
     const repository = new PrismaGymsRepository()
-    const useCase = new CreateGymUseCase(repository)
+    const useCase = new SearchGymsUseCase(repository)
 
 return useCase
 }
