@@ -3,7 +3,6 @@ import { expect, describe,it, beforeEach } from "vitest";
 import { AuthenticateUseCase } from "./authenticate";
 import { hash } from "bcryptjs";
 import { invalidCredencialsError } from "./erros/invalid-credentials-error";
-import { RegisterUseCase } from "./register_";
 
 // const usersRepository = new inMemoryUsersRepository()
 // const sut = new AuthenticateUseCase(usersRepository)

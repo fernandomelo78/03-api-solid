@@ -1,35 +1,38 @@
-import {expect,describe, it, beforeEach} from "vitest"
-import { GetUserMetricsUserCase } from "./get-user-metrics";
+import { expect, describe, it, beforeEach} from "vitest";
 import { inMemoryCheckInRepository } from "@/repositories/in-memory/in-memory-check-ins-repository";
+import { GetUserMetricsUseCase } from "./get-user-metrics";
 
 
-let checkInsRepository: inMemoryCheckInRepository
-let sut:GetUserMetricsUserCase
+let  checkInRepository:inMemoryCheckInRepository
+let  sut: GetUserMetricsUseCase
 
-describe('Get User Metrics Use Case',()=>{
+
+describe('Get User Metrics Use Case  ', async ()=>{
     beforeEach(async ()=>{
-        checkInsRepository = new inMemoryCheckInRepository()
-        sut = new GetUserMetricsUserCase(checkInsRepository)
+        checkInRepository = new inMemoryCheckInRepository()
+        sut = new GetUserMetricsUseCase(checkInRepository)
+
     })
 
-    it('should be able to get check-ins count from metrics', async ()=>{
 
-            await checkInsRepository.create({
+    it('should be able to check-ins count from metrics ', async ()=>{
+
+            await checkInRepository.create({
                 gym_id:'gym-01',
                 user_id:'user-01',
             })
 
-            await checkInsRepository.create({
+            await checkInRepository.create({
                 gym_id:'gym-02',
                 user_id:'user-01',
             })
 
-            const {checkInsCount} = await sut.execute({
-                userId: 'user-01',
-            })
-            console.log('checkInsCount:>' + checkInsCount)
-            expect(checkInsCount).toEqual(2)
 
+        const {checkInsCount} = await sut.execute({
+            userId:'user-01',
+        })
+
+        expect(checkInsCount).toEqual(2)
 
     })
 

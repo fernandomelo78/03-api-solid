@@ -47,29 +47,5 @@ describe('Search Gym', async ()=>{
     
     })
 
-    it.skip('should be able to fetch paginated gym search ', async ()=>{
-
-        for(let i=1;i<= 22;i++){
-            await gymsRepository.create({
-               title: `TypeScript Gym ${i}`,
-               description: null,
-               phone: '1234567890',
-               latitude: -27.5962086,
-               longitude: -48.6243741,
-            })
-
-        }
-
-        const {gyms} = await sut.execute({
-            query:'JavaScript',
-            page:2,
-        })
-
-        expect(gyms).toHaveLength(2)
-        expect(gyms).toEqual([
-            expect.objectContaining({title: 'JavaScript Gym 21'}),
-            expect.objectContaining({title:'JavaScript Gym 22'}),
-        ])   
-    })
-
+    
 })

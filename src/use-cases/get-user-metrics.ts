@@ -1,28 +1,26 @@
 import { CheckInsRepository } from "@/repositories/check-ins-repository";
 
-interface GetUserMetricsUserCaseRequest {
-    userId: string
-}
+// interface GetUserMetricsUserCaseRequest {
+//     userId: string
+// }
 
-interface GetUserMetricsUserCaseResponse {
-    checkInsCount: number
-}
+// interface GetUserMetricsUserCaseResponse {
+//     checkInsCount: number
+// }
 
-export class GetUserMetricsUserCase {
-    constructor (private checkInsRepository: CheckInsRepository) {}
+// export class GetUserMetricsUserCase {
+//     constructor (private checkInsRepository: CheckInsRepository) {}
 
-    async execute ({
-        userId,
-    }: GetUserMetricsUserCaseRequest):Promise<GetUserMetricsUserCaseResponse>{
-        const checkInsCount = await this.checkInsRepository.countByUserId(userId)
+//     async execute ({
+//         userId,
+//     }: GetUserMetricsUserCaseRequest):Promise<GetUserMetricsUserCaseResponse>{
+//         const checkInsCount = await this.checkInsRepository.countByUserId(userId)
     
     
-    return { checkInsCount, }
+//     return { checkInsCount, }
     
-    }
-}
-import { Checkin } from "@prisma/client";
-import { CheckInsRepository } from "@/repositories/check-ins-repository";
+//     }
+// }
 
 
 interface GetUserMetricsUseCaseRequest {
