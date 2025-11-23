@@ -1,9 +1,9 @@
-name: RUN E2E TETS
+name: RUN E2E TESTS
 
 on:  [pull_request]
 jobs:
   run-e2e-tests:
-    name: Run e2e Tests
+    name: Run e2e tests
     runs-on:  ubuntu-latest
 
     services:
