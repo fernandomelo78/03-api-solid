@@ -3,7 +3,7 @@ name: RUN E2E TESTS
 on:  [pull_request]
 jobs:
   run-e2e-tests:
-    name: Run e2e tests
+    name: Run E2E Tests
     runs-on:  ubuntu-latest
 
     services:
