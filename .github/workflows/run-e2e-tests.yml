@@ -1,4 +1,4 @@
-name: Run e2e Tests
+name: RUN E2E TETS
 
 on:  [pull_request]
 jobs:
