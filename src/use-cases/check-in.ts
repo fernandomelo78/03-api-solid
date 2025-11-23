@@ -7,7 +7,7 @@ import { CheckInsRepository } from "@/repositories/check-ins-repository";
 import { UserAlreadyCheckedInError } from "./erros/user-alread-chekedIn-error";
 import { GymsRepository } from "@/repositories/gyms-repository";
 import { resourceNotFoundError } from "./erros/resource-not-found-error";
-import { getDistanceBetweenCoordinates } from "./utils/get-distance-between-coordenates";
+import { getDistanceBetweenCoordinates } from "../utils/get-distance-between-coordenates";
 import { MaxDistanceError } from "./erros/max-distance-error";
 
 interface CheckinUseCaseRequest{

@@ -3,7 +3,8 @@ import { usersRoutes } from './http/controllers/users/routes'
 import { ZodError } from 'zod'
 import { env } from './env'
 import fastifyJwt from '@fastify/jwt'
-import { gymsRoutes } from './http/controllers/users/gyms/routes'
+import { gymsRoutes } from './http/controllers/gyms/routes'
+import { ChekInsRoutes } from './http/controllers/check-ins/routes'
 
 
 export const app = fastify()
@@ -14,6 +15,7 @@ app.register(fastifyJwt,{
 
 app.register(usersRoutes)
 app.register(gymsRoutes)
+app.register(ChekInsRoutes)
 
 
 // app.register(appRoutes)
@@ -30,6 +32,6 @@ app.setErrorHandler((error,request,reply) =>{
     }else{
         //TODO: Here we should log to an external tool like DataDog/NewRelic/Sentry
     }
-    return reply.status(500).send({message:'internal server error. ' + error.message})
+    return reply.status(500).send({message:'internal server error. ' + error})
 
 })
