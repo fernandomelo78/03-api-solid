@@ -24,14 +24,39 @@ try{
         email,
         password
     })
-    const token = await reply.jwtSign({},{
+
+   
+  
+    const token = await reply.jwtSign({
+        role:user.role,
+    },{
         sign:{
             sub:user.id,
         }
     })
 
+    const refreshToken = await reply.jwtSign(
+        {
+           role:user.role,
+        },
+        {
+            sign:{
+                sub:user.id,
+                expiresIn:'7d',
+            },
+        },
+    )
 
-    return reply.status(200).send({
+
+    return reply
+    .setCookie('refreshToken', refreshToken,{
+        path:'/', //quais rotas da  aplicação terão acesso ao cookie,
+        secure:true, //usa o https para enctriptar o cookie, não sendo possível ler no frontEnd
+        sameSite:true, //somente o dominio tera acesso
+        httpOnly:true, //somente o backEnd poderá acessar, ficara disponível somente na requisição, não fica salvo no navegador    
+    })
+    .status(200)
+    .send({
         token,
     })
 }catch (err){
